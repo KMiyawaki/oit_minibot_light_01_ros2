@@ -51,7 +51,7 @@ define robot position
   gui_nose 1
   drive "diff"
   YDLIDAR_X4(pose [ 0.03 0 -0.0894 0 ])
-  IMX219_D160(pose [ 0.03 0 -0.03075 0 ])
+  IMX219_D160(pose [ 0.0289 0 -0.03075 0 ])
   antenna(pose [ 0.01  0.10 0 0 ])
   antenna(pose [ 0.01 -0.10 0 0 ])
   velocity_bounds     [-1.2 1.2 0 0 0 0 -270 270]
