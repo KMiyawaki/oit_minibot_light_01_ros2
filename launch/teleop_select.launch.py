@@ -7,6 +7,8 @@ from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.conditions import IfCondition
 from launch.substitutions import LaunchConfiguration, PythonExpression
 
+pack_dir = get_package_share_directory('oit_minibot_light_01_ros2')
+
 
 def if_condition(conf, op, value):
     if type(value) == str:
@@ -16,7 +18,6 @@ def if_condition(conf, op, value):
 
 
 def generate_launch_description():
-    pack_dir = get_package_share_directory('oit_minibot_light_01_ros2')
     joy_conf = os.path.join(pack_dir, 'config', 'joy.yaml')
 
     teleop_arg = DeclareLaunchArgument('teleop', default_value='joy',
