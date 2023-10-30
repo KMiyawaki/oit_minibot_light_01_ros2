@@ -20,15 +20,15 @@ def get_robot_desc():
 def generate_launch_description():
     use_robot_state_publisher_arg = DeclareLaunchArgument('use_robot_state_publisher', default_value='false',
                                                           description='select to use robot_state_publisher', choices=['true', 'false'])
-    use_robot_state_publisher_conf = LaunchConfiguration(
+    use_robot_state_publisher = LaunchConfiguration(
         use_robot_state_publisher_arg.name)
 
     use_rviz_arg = DeclareLaunchArgument('use_rviz', default_value='false',
                                          description='select to use rviz', choices=['true', 'false'])
-    use_rviz_conf = LaunchConfiguration(use_rviz_arg.name)
+    use_rviz = LaunchConfiguration(use_rviz_arg.name)
 
-    ydlidar_param = os.path.join(pack_dir, 'config', 'X4.yaml')
-    laser_filter_param = os.path.join(pack_dir, 'config', 'laser_filter.yaml')
+    X4_yaml = os.path.join(pack_dir, 'config', 'X4.yaml')
+    laser_filter_yaml = os.path.join(pack_dir, 'config', 'laser_filter.yaml')
 
     ydlidar = LifecycleNode(package='ydlidar_ros2_driver',
                             executable='ydlidar_ros2_driver_node',
@@ -36,13 +36,13 @@ def generate_launch_description():
                             output='screen',
                             emulate_tty=True,
                             namespace='/',
-                            parameters=[ydlidar_param])
+                            parameters=[X4_yaml])
     laser_filter = Node(
         package="laser_filters",
         executable="scan_to_scan_filter_chain",
         output='screen',
-        parameters=[laser_filter_param],
-        remappings=[('scan_filtered', 'base_scan')]
+        parameters=[laser_filter_yaml],
+        remappings=[('scan_filtered', 'scan')]
     )
 
     rsp = Node(package='robot_state_publisher',
@@ -50,12 +50,12 @@ def generate_launch_description():
                name='robot_state_publisher',
                output='both',
                parameters=[{'robot_description': get_robot_desc()}],
-               condition=IfCondition(use_robot_state_publisher_conf))
+               condition=IfCondition(use_robot_state_publisher))
 
     rviz_launch = PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'rviz.launch.py'))
     rviz = IncludeLaunchDescription(rviz_launch,
-                                    condition=IfCondition(use_rviz_conf),
+                                    condition=IfCondition(use_rviz),
                                     launch_arguments={'rviz_conf': 'simple'}.items())
 
     return LaunchDescription([ydlidar, laser_filter, rsp, rviz])

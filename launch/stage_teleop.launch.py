@@ -9,16 +9,22 @@ pack_dir = get_package_share_directory('oit_minibot_light_01_ros2')
 
 
 def generate_launch_description():
+    world_arg = DeclareLaunchArgument('world', default_value='HRC',
+                                      description='World file relative to the project world file, without .world')
+    world = LaunchConfiguration(world_arg.name)
+
     teleop_arg = DeclareLaunchArgument('teleop', default_value='key',
                                        description='teleop device type', choices=['joy', 'key', 'mouse'])
-    teleop_conf = LaunchConfiguration(teleop_arg.name)
+    teleop = LaunchConfiguration(teleop_arg.name)
 
     stage = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(pack_dir, 'launch', 'stage.launch.py')))
+        os.path.join(pack_dir, 'launch', 'stage.launch.py')),
+        launch_arguments={'world': world}.items())
     rviz = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(pack_dir, 'launch', 'rviz.launch.py')))
+        os.path.join(pack_dir, 'launch', 'rviz.launch.py')),
+        launch_arguments={'rviz_conf': 'simple', 'use_sim_time': 'True'}.items())
     teleop_select = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'teleop_select.launch.py')),
-        launch_arguments={'teleop': teleop_conf}.items())
+        launch_arguments={'teleop': teleop}.items())
 
-    return LaunchDescription([stage, rviz, teleop_arg, teleop_select])
+    return LaunchDescription([world_arg, teleop_arg, stage, rviz, teleop_select])

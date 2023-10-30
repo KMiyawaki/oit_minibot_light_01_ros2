@@ -10,22 +10,29 @@ slam_toolbox_dir = get_package_share_directory('slam_toolbox')
 
 
 def generate_launch_description():
+    world_arg = DeclareLaunchArgument('world', default_value='HRC',
+                                      description='World file relative to the project world file, without .world')
+    world = LaunchConfiguration(world_arg.name)
+
     teleop_arg = DeclareLaunchArgument('teleop', default_value='key',
                                        description='teleop device type', choices=['joy', 'key', 'mouse'])
-    teleop_conf = LaunchConfiguration(teleop_arg.name)
+    teleop = LaunchConfiguration(teleop_arg.name)
 
     slam_launch = os.path.join(
         slam_toolbox_dir, 'launch', 'online_async_launch.py')
-    slam_conf = os.path.join(pack_dir, 'config', 'slam_toolbox_online.yaml')
+    slam_toolbox_online_yaml = os.path.join(
+        pack_dir, 'config', 'slam_toolbox_online.yaml')
 
     stage = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(pack_dir, 'launch', 'stage.launch.py')))
+        os.path.join(pack_dir, 'launch', 'stage.launch.py')),
+        launch_arguments={'world': world}.items())
     rviz = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(pack_dir, 'launch', 'rviz.launch.py')), launch_arguments={'rviz_conf': 'mapping'}.items())
+        os.path.join(pack_dir, 'launch', 'rviz.launch.py')),
+        launch_arguments={'use_sim_time': 'True', 'rviz_conf': 'mapping'}.items())
     teleop_select = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'teleop_select.launch.py')),
-        launch_arguments={'teleop': teleop_conf}.items())
+        launch_arguments={'teleop': teleop}.items())
     slam = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        slam_launch), launch_arguments={'use_sim_time': 'true', 'slam_params_file': slam_conf}.items())
+        slam_launch), launch_arguments={'use_sim_time': 'true', 'slam_params_file': slam_toolbox_online_yaml}.items())
 
-    return LaunchDescription([stage, rviz, teleop_arg, teleop_select, slam])
+    return LaunchDescription([world_arg, teleop_arg, stage, rviz, teleop_select, slam])

@@ -12,7 +12,7 @@ def calc_ticks_per_meter(encoder_cpr, gear_ratio, radius):
 
 def generate_launch_description():
     pack_dir = get_package_share_directory('oit_minibot_light_01_ros2')
-    conf = os.path.join(pack_dir, 'config', 'roboclaw.yaml')
+    roboclaw_yaml = os.path.join(pack_dir, 'config', 'roboclaw.yaml')
 
     return LaunchDescription([
         Node(
@@ -20,7 +20,7 @@ def generate_launch_description():
             executable='oit_roboclaw_driver',
             output='screen',
             name='oit_roboclaw_driver',
-            parameters=[conf]
+            parameters=[roboclaw_yaml]
         ),
         Node(
             package='oit_roboclaw_driver2',

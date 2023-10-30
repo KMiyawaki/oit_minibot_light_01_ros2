@@ -5,7 +5,10 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
+        - /Map1/Topic1
+        - /Map1/Update Topic1
       Splitter Ratio: 0.5
     Tree Height: 422
   - Class: rviz_common/Selection
@@ -72,12 +75,12 @@ Visualization Manager:
       Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic:
-        Depth: 5
+        Depth: 1
         Durability Policy: Volatile
-        Filter size: 10
+        Filter size: 1
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /base_scan
+        Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -87,8 +90,8 @@ Visualization Manager:
       Description File: ""
       Description Source: Topic
       Description Topic:
-        Depth: 5
-        Durability Policy: Volatile
+        Depth: 1
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Best Effort
         Value: /robot_description
@@ -129,13 +132,12 @@ Visualization Manager:
       Show Names: false
       Tree:
         map:
-          {}
-        odom:
-          base_link:
-            camera:
-              {}
-            laser:
-              {}
+          odom:
+            base_link:
+              camera:
+                {}
+              laser:
+                {}
       Update Interval: 0
       Value: true
     - Alpha: 0.699999988079071
@@ -146,14 +148,14 @@ Visualization Manager:
       Name: Map
       Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map
       Update Topic:
         Depth: 5
-        Durability Policy: Volatile
+        Durability Policy: Transient Local
         History Policy: Keep Last
         Reliability Policy: Reliable
         Value: /map_updates
@@ -205,7 +207,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 5.567732810974121
+      Distance: 7.468926429748535
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -241,5 +243,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 959
-  X: 70
-  Y: 27
+  X: 270
+  Y: 92
