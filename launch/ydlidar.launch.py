@@ -36,13 +36,14 @@ def generate_launch_description():
                             output='screen',
                             emulate_tty=True,
                             namespace='/',
-                            parameters=[X4_yaml])
+                            parameters=[X4_yaml],
+                            remappings=[('scan', 'ydlidar_scan')])
     laser_filter = Node(
         package="laser_filters",
         executable="scan_to_scan_filter_chain",
         output='screen',
         parameters=[laser_filter_yaml],
-        remappings=[('scan_filtered', 'scan')]
+        remappings=[('scan', 'ydlidar_scan'), ('scan_filtered', 'scan')]
     )
 
     rsp = Node(package='robot_state_publisher',
