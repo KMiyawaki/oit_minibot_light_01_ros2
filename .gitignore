@@ -48,3 +48,5 @@ CATKIN_IGNORE
 
 #Visucal Studio Code
 .vscode
+
+/bags
