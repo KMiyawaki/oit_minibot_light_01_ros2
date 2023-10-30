@@ -58,4 +58,4 @@ def generate_launch_description():
                                     condition=IfCondition(use_rviz),
                                     launch_arguments={'rviz_conf': 'simple'}.items())
 
-    return LaunchDescription([ydlidar, laser_filter, rsp, rviz])
+    return LaunchDescription([use_rviz_arg, use_robot_state_publisher_arg, ydlidar, laser_filter, rsp, rviz])

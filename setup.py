@@ -33,7 +33,7 @@ setup(
     name=package_name,
     version='0.0.0',
     packages=find_packages(exclude=['test']),
-    data_files=data_files(['config', 'launch', 'maps', 'rviz']),
+    data_files=data_files(['config', 'launch', 'maps', 'urdf', 'rviz']),
     install_requires=['setuptools'],
     zip_safe=True,
     maintainer='miyawaki',
