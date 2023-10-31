@@ -16,7 +16,7 @@ def generate_launch_description():
         map_arg.name + '_path', default=[pack_dir, '/maps/', map, '.yaml'])
 
     use_sim_time_arg = DeclareLaunchArgument(
-        'use_sim_time', default_value='False')
+        'use_sim_time', default_value='false')
     use_sim_time = LaunchConfiguration(use_sim_time_arg.name)
 
     amcl_params = os.path.join(pack_dir, 'config', 'amcl.yaml')
