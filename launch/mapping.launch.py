@@ -23,6 +23,7 @@ def generate_launch_description():
         slam_toolbox_dir, 'launch', 'online_async_launch.py')
     slam_toolbox_online_yaml = os.path.join(
         pack_dir, 'config', 'slam_toolbox_online.yaml')
+    cartographer_launch = os.path.join(pack_dir, 'launch', 'cartographer.launch.py')
 
     devices = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'devices.launch.py')))
@@ -32,13 +33,13 @@ def generate_launch_description():
     rviz = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'rviz.launch.py')),
         launch_arguments={'use_sim_time': 'false', 'rviz_conf': 'mapping'}.items())
-    slam = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        slam_launch), launch_arguments={'use_sim_time': 'false', 'slam_params_file': slam_toolbox_online_yaml}.items(),
+    slam_toolbox = IncludeLaunchDescription(PythonLaunchDescriptionSource(slam_launch), 
+        launch_arguments={'use_sim_time': 'false', 'slam_params_file': slam_toolbox_online_yaml}.items(),
         condition=IfCondition(PythonExpression(["'", slam, "' == 'slam_toolbox'"])))
-    cartographer = IncludeLaunchDescription(PythonLaunchDescriptionSource(
-        os.path.join(pack_dir, 'launch', 'cartographer.launch.py')),
+    cartographer = IncludeLaunchDescription(PythonLaunchDescriptionSource(cartographer_launch), 
         launch_arguments={'use_sim_time': 'false'}.items(),
         condition=IfCondition(PythonExpression(["'", slam, "' == 'cartographer'"])))
-    timer = TimerAction(period=7.5, actions=[slam, cartographer, rviz])
+        
+    timer = TimerAction(period=7.5, actions=[rviz, slam_toolbox, cartographer])
 
-    return LaunchDescription([teleop_arg, devices, teleop_select, timer])
+    return LaunchDescription([teleop_arg, slam_arg, devices, teleop_select, timer])
