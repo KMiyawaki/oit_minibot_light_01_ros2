@@ -23,9 +23,9 @@ def generate_launch_description():
     use_robot_state_publisher = LaunchConfiguration(
         use_robot_state_publisher_arg.name)
 
-    use_rviz_arg = DeclareLaunchArgument('use_rviz', default_value='false',
-                                         description='select to use rviz', choices=['true', 'false'])
-    use_rviz = LaunchConfiguration(use_rviz_arg.name)
+    rviz_conf_arg = DeclareLaunchArgument('rviz_conf', default_value='none',
+                                         description='select to use rviz', choices=['simple', 'none'])
+    rviz_conf = LaunchConfiguration(rviz_conf_arg.name)
 
     X4_yaml = os.path.join(pack_dir, 'config', 'X4.yaml')
     laser_filter_yaml = os.path.join(pack_dir, 'config', 'laser_filter.yaml')
@@ -56,7 +56,6 @@ def generate_launch_description():
     rviz_launch = PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'rviz.launch.py'))
     rviz = IncludeLaunchDescription(rviz_launch,
-                                    condition=IfCondition(use_rviz),
-                                    launch_arguments={'rviz_conf': 'simple'}.items())
+                                    launch_arguments={'rviz_conf': rviz_conf}.items())
 
-    return LaunchDescription([use_rviz_arg, use_robot_state_publisher_arg, ydlidar, laser_filter, rsp, rviz])
+    return LaunchDescription([rviz_conf_arg, use_robot_state_publisher_arg, ydlidar, laser_filter, rsp, rviz])

@@ -15,7 +15,7 @@ def generate_launch_description():
     world = LaunchConfiguration(world_arg.name)
 
     teleop_arg = DeclareLaunchArgument('teleop', default_value='key',
-                                       description='teleop device type', choices=['joy', 'key', 'mouse'])
+                                       description='teleop device type', choices=['joy', 'key', 'mouse', 'none'])
     teleop = LaunchConfiguration(teleop_arg.name)
 
     slam_launch = os.path.join(

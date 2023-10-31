@@ -21,7 +21,7 @@ def generate_launch_description():
     joy_yaml = os.path.join(pack_dir, 'config', 'joy.yaml')
 
     teleop_arg = DeclareLaunchArgument('teleop', default_value='joy',
-                                       description='teleop device type', choices=['joy', 'key', 'mouse'])
+                                       description='teleop device type', choices=['joy', 'key', 'mouse', 'none'])
     teleop = LaunchConfiguration(teleop_arg.name)
 
     joy = GroupAction(actions=[
