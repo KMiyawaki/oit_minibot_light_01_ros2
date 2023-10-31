@@ -20,12 +20,12 @@ def generate_launch_description():
     bag_path = LaunchConfiguration(
         bag_arg.name + '_path', default=[ws_dir, '/bags/', bag])
 
-    slam_arg = DeclareLaunchArgument(
-        'slam', default_value='true')
+    slam_arg = DeclareLaunchArgument('slam', default_value='cartographer',
+                                     choices=['slam_toolbox', 'cartographer', 'none'])
     slam = LaunchConfiguration(slam_arg.name)
 
     rviz_conf_arg = DeclareLaunchArgument(
-        'rviz_conf', default_value=PythonExpression(["'simple'", " if '", slam, "' == 'false' else 'mapping'"]))
+        'rviz_conf', default_value=PythonExpression(["'simple'", " if '", slam, "' == 'none' else 'mapping'"]))
     rviz_conf = LaunchConfiguration(rviz_conf_arg.name)
 
     slam_toolbox_offline_yaml = os.path.join(
@@ -37,17 +37,23 @@ def generate_launch_description():
         executable='sync_slam_toolbox_node',
         name='slam_toolbox',
         output='screen',
-        condition=IfCondition(slam)
+        condition=IfCondition(PythonExpression(
+            ["'", slam, "' == 'slam_toolbox'"]))
     )
+
+    cartographer = IncludeLaunchDescription(PythonLaunchDescriptionSource(
+        os.path.join(pack_dir, 'launch', 'cartographer.launch.py')),
+        launch_arguments={'use_sim_time': 'true'}.items(),
+        condition=IfCondition(PythonExpression(["'", slam, "' == 'cartographer'"])))
 
     rviz = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'rviz.launch.py')),
         launch_arguments={'rviz_conf': rviz_conf,
-                          'use_sim_time': 'false'}.items())
+                          'use_sim_time': 'true'}.items())
 
     bag_play = ExecuteProcess(
         cmd=['ros2', 'bag', 'play', bag_path],
         output='screen'
     )
 
-    return LaunchDescription([bag_arg, rviz_conf_arg, slam_arg, slam_offline, rviz, bag_play])
+    return LaunchDescription([bag_arg, slam_arg, rviz_conf_arg, slam_offline, cartographer, rviz, bag_play])

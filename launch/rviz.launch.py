@@ -17,13 +17,13 @@ def generate_launch_description():
 
     use_sim_time_arg = DeclareLaunchArgument(
         'use_sim_time', default_value='false', choices=['true', 'false'])
-    use_sim_time_conf = LaunchConfiguration(use_sim_time_arg.name)
+    use_sim_time = LaunchConfiguration(use_sim_time_arg.name)
 
     rviz = Node(package='rviz2',
                 executable='rviz2',
                 name='rviz2',
                 output='screen',
-                parameters=[{'use_sim_time': use_sim_time_conf}],
+                parameters=[{'use_sim_time': use_sim_time}],
                 condition=IfCondition(PythonExpression(["'", rviz_conf, "' != 'none'"])),
                 arguments=['-d', rviz_conf_path])
 
