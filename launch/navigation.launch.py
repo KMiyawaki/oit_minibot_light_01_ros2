@@ -10,7 +10,7 @@ nav2_bringup_dir = get_package_share_directory('nav2_bringup')
 
 
 def generate_launch_description():
-    map_arg = DeclareLaunchArgument('map', default_value='241_zemi',
+    map_arg = DeclareLaunchArgument('map', default_value='HRC',
                                     description='map file name, without .yaml')
     map = LaunchConfiguration(map_arg.name)
 
