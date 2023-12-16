@@ -5,7 +5,7 @@ from launch_ros.actions import Node
 from launch_ros.descriptions import ParameterFile
 from launch.actions import DeclareLaunchArgument, GroupAction
 from launch.substitutions import LaunchConfiguration
-from nav2_common.launch import RewrittenYaml, ReplaceString
+from nav2_common.launch import RewrittenYaml
 
 pack_dir = get_package_share_directory('oit_minibot_light_01_ros2')
 

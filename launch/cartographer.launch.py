@@ -1,10 +1,6 @@
 
 # https://github.com/jdgalviss/realsense_ros2/blob/979350f8b5c1c70bea1d54182f893e8be6bc5e17/realsense_ros2/launch/cartographer_launch.py
 
-import launch
-import launch.actions
-import launch.substitutions
-import launch_ros.actions
 
 from launch import LaunchDescription
 from launch_ros.actions import Node

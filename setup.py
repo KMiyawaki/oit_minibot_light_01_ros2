@@ -43,6 +43,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
+            'csi_camera = oit_minibot_light_01_ros2.csi_camera:main',
         ],
     },
 )

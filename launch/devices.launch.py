@@ -20,10 +20,12 @@ def generate_launch_description():
         os.path.join(pack_dir, 'launch', 'roboclaw.launch.py')))
     ydlidar = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'ydlidar.launch.py')))
+    csi_camera = IncludeLaunchDescription(PythonLaunchDescriptionSource(
+        os.path.join(pack_dir, 'launch', 'csi_camera.launch.py')))
     rsp = Node(package='robot_state_publisher',
                executable='robot_state_publisher',
                name='robot_state_publisher',
                output='both',
                parameters=[{'robot_description': get_robot_desc()}])
 
-    return LaunchDescription([roboclaw, ydlidar, rsp])
+    return LaunchDescription([roboclaw, ydlidar, csi_camera, rsp])
