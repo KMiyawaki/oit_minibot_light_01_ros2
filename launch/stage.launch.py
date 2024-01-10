@@ -20,7 +20,7 @@ def generate_launch_description():
             package='stage_ros2',
             executable='stage_ros2',
             name='stage',
-            remappings=[('base_scan', 'scan')],
+            remappings=[('base_scan', 'scan'), ('image', 'video_source/raw')],
             parameters=[{"world_file": world_path}]
         )
     ])
