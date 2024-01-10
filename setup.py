@@ -31,7 +31,7 @@ def data_files(dirs):
 
 setup(
     name=package_name,
-    version='0.0.0',
+    version='0.9.0',
     packages=find_packages(exclude=['test']),
     data_files=data_files(['config', 'launch', 'maps', 'urdf', 'rviz']),
     install_requires=['setuptools'],
@@ -39,7 +39,7 @@ setup(
     maintainer='miyawaki',
     maintainer_email='5770105+KMiyawaki@users.noreply.github.com',
     description='Minibot Light 01 ROS2 package',
-    license='BSD',
+    license='Apache License 2.0',
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [

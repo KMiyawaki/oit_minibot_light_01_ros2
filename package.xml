@@ -2,10 +2,10 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>oit_minibot_light_01_ros2</name>
-  <version>0.0.0</version>
+  <version>0.9.0</version>
   <description>Minibot Light 01 ROS2 package</description>
   <maintainer email="5770105+KMiyawaki@users.noreply.github.com">miyawaki</maintainer>
-  <license>BSD</license>
+  <license>Apache License 2.0</license>
 
   <depend>rclpy</depend>
   <depend>std_msgs</depend>
