@@ -21,6 +21,7 @@ def generate_launch_description():
             executable='stage_ros2',
             name='stage',
             remappings=[('base_scan', 'scan'), ('image', 'video_source/raw')],
-            parameters=[{"world_file": world_path}]
+            parameters=[{"world_file": world_path}, 
+                        {'use_static_transformations': True}]
         )
     ])

@@ -5,6 +5,8 @@ Panels:
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /LaserScan1
+        - /LaserScan1/Topic1
         - /RobotModel1/Description Topic1
       Splitter Ratio: 0.5
     Tree Height: 186
@@ -25,7 +27,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: LaserScan
 Visualization Manager:
   Class: ""
   Displays:
@@ -62,9 +64,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 1020
+      Max Intensity: 1
       Min Color: 0; 0; 0
-      Min Intensity: 1008
+      Min Intensity: 1
       Name: LaserScan
       Position Transformer: XYZ
       Selectable: true
@@ -72,9 +74,9 @@ Visualization Manager:
       Size (m): 0.05000000074505806
       Style: Flat Squares
       Topic:
-        Depth: 1
+        Depth: 5
         Durability Policy: Volatile
-        Filter size: 1
+        Filter size: 100
         History Policy: Keep Last
         Reliability Policy: Best Effort
         Value: /scan
@@ -112,13 +114,26 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
+        base_link:
+          Value: true
+        camera:
+          Value: true
+        laser:
+          Value: true
+        odom:
+          Value: true
       Marker Scale: 0.5
       Name: TF
       Show Arrows: true
       Show Axes: true
       Show Names: false
       Tree:
-        {}
+        odom:
+          base_link:
+            camera:
+              {}
+            laser:
+              {}
       Update Interval: 0
       Value: true
     - Class: rviz_default_plugins/Image

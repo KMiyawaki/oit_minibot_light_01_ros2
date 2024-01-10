@@ -22,7 +22,7 @@ def generate_launch_description():
         launch_arguments={'world': world}.items())
     rviz = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'rviz.launch.py')),
-        launch_arguments={'rviz_conf': 'simple', 'use_sim_time': 'True'}.items())
+        launch_arguments={'rviz_conf': 'simple', 'use_sim_time': 'true'}.items())
     teleop_select = IncludeLaunchDescription(PythonLaunchDescriptionSource(
         os.path.join(pack_dir, 'launch', 'teleop_select.launch.py')),
         launch_arguments={'teleop': teleop}.items())
