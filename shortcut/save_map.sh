@@ -15,9 +15,21 @@ function main(){
     local -r MAP_DIR=${HOME}/ros2_ws/src/${PACKAGE}/maps
     cd ${MAP_DIR}
     echo "save map to ${MAP_DIR}/${MAP_NAME}"
-    ros2 run nav2_map_server map_saver_cli -f ${MAP_NAME}
-    cd ${HOME}/ros2_ws/src/${PACKAGE}
-    ./build.sh
+
+    for i in `seq 1 10`
+    do
+        ros2 run nav2_map_server map_saver_cli -f ${MAP_NAME} 2>&1 | grep "Failed to spin map subscription"
+        if [ $? = 0 ]; then
+            echo "Failed to save map ${MAP_NAME}. Trying again..."
+        else
+            echo "Succeeded to save map ${MAP_NAME}."
+            echo "Build started to transfer the map files."
+            cd ${HOME}/ros2_ws/src/${PACKAGE}
+            ./build.sh
+            return 0
+        fi    
+    done
+    echo "All trials were failed. Aborted."
 }
 
 main "$@"

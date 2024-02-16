@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=teleop
+Comment=oit_minibot_light_01_ros2 keyboard teleop
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh teleop.sh"
+Icon=oit_teleop
+Terminal=true

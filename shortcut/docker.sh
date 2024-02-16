@@ -6,7 +6,7 @@ function main(){
         exit 1
     fi
     local -r PACKAGE="oit_minibot_light_01_ros2"
-    ${HOME}/docker_ros_humble/run_prog.sh ${HOME}/ros2_ws/src/${PACKAGE}/launcher/${1}
+    ${HOME}/docker_ros_humble/run_prog.sh ${HOME}/ros2_ws/src/${PACKAGE}/shortcut/${1}
 }
 
 main "$@"

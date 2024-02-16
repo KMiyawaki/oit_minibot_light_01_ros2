@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=devices
+Comment=oit_minibot_light_01_ros2 devices launcher
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh devices.sh"
+Icon=oit_devices
+Terminal=true

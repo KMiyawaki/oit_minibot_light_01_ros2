@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=mapping
+Comment=oit_minibot_light_01_ros2 mapping launcher
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh mapping.sh"
+Icon=oit_mapping
+Terminal=true

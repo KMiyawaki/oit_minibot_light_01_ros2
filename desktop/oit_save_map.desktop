@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=save map
+Comment=oit_minibot_light_01_ros2 save map
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh save_map.sh && nautilus ~/ros2_ws/src/oit_minibot_light_01_ros2/maps"
+Icon=oit_save_map
+Terminal=true

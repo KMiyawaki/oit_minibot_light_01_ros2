@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=capture
+Comment=oit_minibot_light_01_ros2 image capture
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh capture.sh && nautilus ~/ros2_ws"
+Icon=oit_capture
+Terminal=true

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=stop all
+Comment=oit_minibot_light_01_ros2 stop all
+Exec=bash -c "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/docker.sh stop_all.sh"
+Icon=oit_stop_all
+Terminal=true
