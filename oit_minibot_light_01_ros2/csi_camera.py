@@ -6,6 +6,7 @@ import cv2
 import cv_bridge
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import ExternalShutdownException
 from sensor_msgs.msg import Image
 
 def gstreamer_pipeline(
@@ -56,14 +57,17 @@ class CSICameraNode(Node):
 def main(args=None):
     script_name = os.path.basename(__file__)
     node_name = os.path.splitext(script_name)[0]
+    rclpy.init(args=args)
+    node = CSICameraNode(node_name)
     try:
-        rclpy.init(args=args)
-        node = CSICameraNode(node_name)
         rclpy.spin(node)
-    except KeyboardInterrupt:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
+    except SystemExit:
+        print(node_name, 'SystemExit')
+        rclpy.shutdown()
     finally:
-        node.get_logger().info("Exiting %s" % node.get_name())
+        print(node_name, 'destroy_node')
         node.destroy_node()
         rclpy.shutdown()
 

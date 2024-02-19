@@ -7,6 +7,7 @@ import cv2
 import cv_bridge
 import rclpy
 from rclpy.node import Node
+from rclpy.executors import ExternalShutdownException
 from sensor_msgs.msg import Image
 
 class ImageCaptureNode(Node):
@@ -30,16 +31,18 @@ class ImageCaptureNode(Node):
 def main(args=None):
     script_name = os.path.basename(__file__)
     node_name = os.path.splitext(script_name)[0]
+    rclpy.init(args=args)
+    node = ImageCaptureNode(node_name)
     try:
-        rclpy.init(args=args)
-        node = ImageCaptureNode(node_name)
         rclpy.spin(node)
-    except SystemExit:
+    except (KeyboardInterrupt, ExternalShutdownException):
         pass
-    finally:
-        node.get_logger().info("Exiting %s" % node.get_name())
-        node.destroy_node()
+    except SystemExit:
+        print(node_name, 'SystemExit')
         rclpy.shutdown()
+    finally:
+        print(node_name, 'destroy_node')
+        node.destroy_node()
 
 
 if __name__ == '__main__':
