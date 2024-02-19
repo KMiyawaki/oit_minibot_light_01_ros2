@@ -44,7 +44,7 @@ function main(){
     install_desktop_entry ${DESK} ./desktop/oit_navigation.desktop 
     install_desktop_entry ${APPS} ./desktop/oit_devices.desktop 1
     install_desktop_entry ${APPS} ./desktop/oit_save_map.desktop 1
-    # install_desktop_entry ${APPS} ./desktop/oit_ros_python2.desktop
+    install_desktop_entry ${APPS} ./desktop/oit_ros2_python3.desktop
     echo "Set default app for python with right click *.py file."
 }
 

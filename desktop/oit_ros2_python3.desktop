@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Terminal=false
+Icon=application-default-icon
+Name=Exec ROS2 python3 script
+Comment=Exec ROS2 python3 script with double click
+Exec=xterm -hold -e "~/ros2_ws/src/oit_minibot_light_01_ros2/shortcut/copy_and_run_script.sh %f"
