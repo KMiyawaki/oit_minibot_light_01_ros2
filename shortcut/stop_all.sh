@@ -8,7 +8,7 @@ function main(){
     export ROS_LOCALHOST_ONLY=1
     export ROS_DOMAIN_ID=0
     
-    ros2 topic pub -r 2 -t 5 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.0}, angular: {z: 0.0}}'
+    # ros2 topic pub -r 2 -t 5 /cmd_vel geometry_msgs/Twist '{linear: {x: 0.0}, angular: {z: 0.0}}'
 
     local PROGS=`ps -aux | grep ros | grep -v grep | awk '{ printf("%d ", $2);for(i=11;i<=NF;++i){ printf("%s ",$i) };printf("\n") }'`
     while read p
