@@ -16,7 +16,7 @@ function main(){
     sudo make install
     
     cd ${HOME}/ros2_ws/src
-    if [[ "${TARGET_ROS}" =~ "humble" ]]; then
+    if [[ "${TARGET_ROS}" =~ "humble" ]] || [[ "${TARGET_ROS}" =~ "jazzy" ]]; then
         git clone https://github.com/YDLIDAR/ydlidar_ros2_driver -b humble
     else
         git clone https://github.com/YDLIDAR/ydlidar_ros2_driver

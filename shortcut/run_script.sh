@@ -9,7 +9,11 @@ function main(){
     local -r DIST=`${HOME}/ros2_ws/src/${PACKAGE}/get_suitable_ros2.sh`
     source /opt/ros/${DIST}/setup.bash
     source ${HOME}/ros2_ws/install/setup.bash
-    export ROS_LOCALHOST_ONLY=1
+    if [[ "${DIST}" =~ "foxy" ]] || [[ "${DIST}" =~ "humble" ]]; then
+        export ROS_LOCALHOST_ONLY=1
+    else
+        export ROS_AUTOMATIC_DISCOVERY_RANGE=LOCALHOST
+    fi
     export ROS_DOMAIN_ID=0
     python ${1}
 }
