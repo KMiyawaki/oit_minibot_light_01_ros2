@@ -1,6 +1,8 @@
 #!/bin/bash
 function main(){
-    local -r ROS2_WS=${HOME}/ros2_ws
+    local -r PACKAGE_DIR=$(cd "$(dirname "$0")" && pwd)
+    local -r SRC_DIR=$(dirname "${PACKAGE_DIR}")
+    local -r ROS2_WS=$(dirname "${SRC_DIR}")
     local BUILD_ALL=0
     local REBUILD=0
     local CLEAN=0
